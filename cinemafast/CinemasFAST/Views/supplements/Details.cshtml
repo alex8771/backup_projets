@@ -1,0 +1,58 @@
+﻿@model CinemasFAST.Models.supplement
+
+@{
+    ViewBag.Title = " ";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>supplement</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.C3d)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.C3d)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ultra_avx)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ultra_avx)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.dbox)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dbox)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.imax)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.imax)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.salle.taille_ecran)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.salle.taille_ecran)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

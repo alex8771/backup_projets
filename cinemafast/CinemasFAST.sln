@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29613.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CinemasFAST", "CinemasFAST\CinemasFAST.csproj", "{D46218BF-CFA7-4591-8363-57E8D3421ABD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestProjectVMA", "UnitTestProjectVMA\UnitTestProjectVMA.csproj", "{B7C37D03-4D64-4322-A7CF-DF26D5B8BD6F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D46218BF-CFA7-4591-8363-57E8D3421ABD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D46218BF-CFA7-4591-8363-57E8D3421ABD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D46218BF-CFA7-4591-8363-57E8D3421ABD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D46218BF-CFA7-4591-8363-57E8D3421ABD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B7C37D03-4D64-4322-A7CF-DF26D5B8BD6F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7C37D03-4D64-4322-A7CF-DF26D5B8BD6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B7C37D03-4D64-4322-A7CF-DF26D5B8BD6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B7C37D03-4D64-4322-A7CF-DF26D5B8BD6F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {533F67B1-BDAD-4D41-8E41-A9FFE03529AD}
+	EndGlobalSection
+EndGlobal

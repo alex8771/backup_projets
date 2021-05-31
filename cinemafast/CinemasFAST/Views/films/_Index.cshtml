@@ -1,0 +1,165 @@
+﻿@model IEnumerable<CinemasFAST.Models.film>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+    <div class="jumbotron">
+        <h2>Liste des films</h2>
+        @if (ViewBag.erreur == "succes")
+        {
+            <h4 class="text-success">Le film a été ajouté avec succès!</h4>
+        }
+        else if (ViewBag.erreur == "fail")
+        {
+            <h4 class="text-danger">Le formulaire de création du film n'a pas été bien rempli.</h4>
+        }
+        else if (ViewBag.erreur == "succesImport")
+        {
+            <h4 class="text-success">Importation de film terminée avec succès!</h4>
+        }
+        @if (ViewBag.erreurDel == "fail")
+        {
+            <h4 class="text-danger">Ce film ne peut pas être supprimé, il est à l'horaire.</h4>
+        }
+        else if (ViewBag.erreurDel == "succes")
+        {
+            <h4 class="text-success">Le film a bien été supprimé!</h4>
+        }
+
+    </div>
+
+<div class="d-flex mb-2 justify-content-between">
+    @using (Html.BeginForm())
+    {
+        if (ViewBag.searchRequest == null || !ViewBag.searchRequest)
+        {
+            <div class="col-12 d-flex">
+                @Html.TextBox("SearchString", null, new { @class = "form-control col-12 mr-2", placeholder = "Rechercher par titre ou par mot clé du synopsis..." })
+                <input type="submit" value="Lancer la recherche" class="btn btn-primary" />
+            </div>
+        }
+        else
+        {
+            <div class="col-12 d-flex">
+                <input type="submit" value="Afficher la liste complète" class="btn btn-primary" />
+            </div>
+        }
+    }
+
+    @using (Html.BeginForm("ImportFile", "films", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <div id="fileContainer" class="col-6 mb-2">
+            <div id="filebutton" class="border rounded bg-light px-3">
+                <i>Choisir votre fichier .csv</i>
+            </div>
+
+            <div id="wrapper">
+                <input id="fileinput" type="file" name="postedFile" class="form-control" accept=".csv" />
+            </div>
+
+            <input id="filesave" type="submit" value="Importer" class="btn btn-primary" />
+        </div>
+    }
+</div>
+
+
+<div class="scrollable">
+    <table class="table table-light table-striped table-hover sortable">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.titre)
+                </th>
+                <th data-defaultsort="asc">
+                    @Html.DisplayNameFor(model => model.annee)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.type)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.duree)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.note)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.revenue)
+                </th>
+                <th data-defaultsort="disabled"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.titre)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.annee)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.type)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.duree)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.note)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.revenue)
+                    </td>
+                    <td>
+                        @Html.ActionLink(" ", "Details", new { id = item.id }, new { @class = "btn btn-info btn-sm fa fa-info-circle" })
+                        @Html.ActionLink(" ", "DeleteConfirmed", new { id = item.id }, new { @class = "btn btn-danger btn-sm fa fa-trash",@onclick = "return confirm('Voulez-vous supprimer ce film? Il est peut-être présenté dans le futur');" })
+                    </td>
+                </tr>
+            }
+
+            @if (Model.Count() == 0)
+            {
+                <tr>
+                    <td colspan="8" class="font-italic h4 text-secondary">Aucun film n'a été trouvé selon votre recherche.</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>
+
+<hr />
+<p>
+    @Html.ActionLink("Retour à l'accueil", "Index", "Home", null, new { @class = "btn btn-dark" })
+
+    <input type="button" value="Ajouter un film" class="btn btn-success"
+           data-toggle="modal" data-target="#filmCreate" />
+</p>
+
+<style type="text/css">
+    #filebutton, #fileinput {
+        position: absolute;
+        width: 200px;
+        height: 38px;
+        text-align: center;
+        padding-top: 7px;
+        cursor: pointer;
+    }
+
+    #fileContainer {
+        padding-right: 170px;
+    }
+
+    #wrapper {
+        position: relative;
+        cursor: pointer;
+        opacity: 0;
+        width: 128px;
+    }
+
+    #filesave {
+        position: relative;
+        left: 210px;
+    }
+</style>

@@ -1,0 +1,55 @@
+﻿@model IEnumerable<CinemasFAST.Models.seance>
+
+@{
+    ViewBag.Title = "SeanceRechercher";
+}
+<div class="jumbotron">
+    <h2>Seances trouvées <span class="bg-dark rounded text-warning p-2 float-right shadow">Cinéma @Session["nomCinemaActuel"], salle @Session["numeroSalleActuelle"] </span></h2>
+    <h4> @ViewBag.date </h4>
+</div>
+
+<div>
+    @Html.ActionLink("Recherche", "Recherche")
+
+    <table class="table table-light table-striped table-hover">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.heure_debut)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.heure_fin)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.nom_seance)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in ViewBag.SeanceRechercher)
+        {
+            <tr>
+                <td>
+                    @item.heure_debut
+                </td>
+                <td>
+                    @item.heure_fin
+                </td>
+                <td>
+                    @item.nom_seance
+                </td>
+                <td>
+                    @Html.ActionLink(" ", "Edit", new { id = item.id }, new { @class = "btn btn-sm btn-info fa fa-info-circle" })
+                    @Html.ActionLink(" ", "Delete", new { id = item.id }, new { @class = "btn btn-sm btn-danger fa fa-trash" })
+                </td>
+            </tr>
+        }
+    </table>
+
+
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            @Html.ActionLink("Retour", "Index", "seances", new { id = Session["sallecourante"] }, new { @class = "btn btn-dark" })
+        </div>
+    </div>
+</div>

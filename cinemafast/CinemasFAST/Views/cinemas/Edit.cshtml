@@ -1,0 +1,31 @@
+﻿@model CinemasFAST.Models.EditCinema_ViewModel
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<!--Affichage de la vue partielle qui contient l'index des salles-->
+    <div>        
+        @Html.Partial("~/Views/salles/_Index.cshtml", Model.Salles)
+    </div>
+
+<div>
+    @Html.Partial("~/Views/salles/_Create.cshtml", new CinemasFAST.Models.salle())
+</div>
+
+<hr />
+
+<div class="d-flex row">
+    <!--Affichage de la vue partielle qui permet de modifier le cinéma-->
+    <div class="col-8">
+        @Html.Partial("_Edit", Model.CinemaDetails)
+    </div>
+
+    <!--Affichage de la vue partielle qui permet de modifier le responsable du cinéma-->
+    <div class="col-4">
+        @Html.Partial("~/Views/responsables/_Edit.cshtml", Model.ResponsableDetails)
+    </div>
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

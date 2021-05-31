@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>League Of Legends</title>
+        <meta charset="utf-8"/>
+        <script type="text/javascript" src="../js/jquery-3.4.1.min.js"></script>
+        <script type="text/javascript" src="../js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="../js/js.js"></script>
+        <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="../css/style.css">
+        <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.0.7/css/all.css">
+    </head>
+    <body>    
+        <nav class="navbar navbar-expand-sm navbar-light nav justify-content-center" id="Navbar">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            </button>
+            <div  id="navbarNavDropdown">
+                <ul class="navbar-nav justify-content-center">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link " href="#" id="navbarDropdownMenuLink" data-toggle="dropdown">
+                            <h1 class="h1" id="Lol">League Of Legends</h1>
+                        </a>
+                        <div class="dropdown-menu btn-dark" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" id="LolBouton" href="#"><h3 class="h3">Accueil</h3></a>
+                            <a class="dropdown-item" id="PersoBouton" type="button"  href="#"><h3 class="h3">Personnages</h3></a>
+                            <a class="dropdown-item btn" id="ItemBouton" href="#"><h3 class="h3">Items</h3></a>
+                            <a class="dropdown-item" id="ModeBouton" href="#"><h3 class="h3">Mode de jeu</h3></a>
+                            <a class="dropdown-item" id="ShopBouton" href="#"><h3 class="h3">Shop</h3></a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <div id="Index">
+        </div>
+        <div id="Persos">
+            <div id="tableDiv">
+            </div>
+        </div>
+        <div id="Mode">
+            <div class="d-flex justify-content-center">
+                <h1 class="text-white">Les Modes de jeu</h1>
+            </div>
+            <div class="row">
+                <div id="ModeJeu">
+                    <div>
+                        <img src="../images/Map/3.jpg">
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <button type="button" class="btn btn-dark">3 vs 3</button>
+                    </div>
+                </div>
+                <div id="ModeJeu">
+                    <div>
+                        <img src="../images/Map/5.jpg">
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <button type="button" class="btn btn-dark">5 vs 5</button>
+                    </div>
+                </div>
+                <div id="ModeJeu">
+                    <div>
+                        <img src="../images/Map/aram.webp">
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <button type="button" class="btn btn-dark">Aram</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div id="Items"><h1>Items</h1></div>
+
+        <div id="Shop"><h1>Shop</h1></div>
+    </body>
+</html>

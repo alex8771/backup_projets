@@ -1,0 +1,109 @@
+﻿@model CinemasFAST.Models.profil
+
+@{
+    ViewBag.Title = "Edit";
+
+    if (Session["id"] != null && !Session["type"].Equals("admin"))
+    {
+        string id = Session["id"].ToString();
+
+        // Si l'id du compte ne correspond pas à l'id de sa session, refuse l'accès à cette page
+        if (@Model.id != Convert.ToInt32(Session["id"]))
+        {
+            Response.Redirect("~/Home/Index");
+        }
+    }
+}
+<div class="jumbotron">
+    <h2>Mon compte</h2>
+</div>
+
+
+@using (Html.BeginForm())
+{
+
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.id)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.nom_complet, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.nom_complet, new { htmlAttributes = new { @class = "form-control col-8" } })
+                @Html.ValidationMessageFor(model => model.nom_complet, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.username, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.username, new { htmlAttributes = new { @class = "form-control col-8" } })
+                @Html.ValidationMessageFor(model => model.username, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.password, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.password, new { htmlAttributes = new { @class = "form-control col-8", @type = "password" } })
+                @Html.ValidationMessageFor(model => model.password, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.courriel, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.courriel, new { htmlAttributes = new { @class = "form-control col-8" } })
+                @Html.ValidationMessageFor(model => model.courriel, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @if (Session["type"].Equals("admin"))
+        {
+            @:<div class="form-group">
+            }
+            else
+            {
+                @:<div class="form-group d-none">
+                }
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.type, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @if (Session["type"].Equals("admin"))
+                {
+                    @Html.DropDownList("type", new List<SelectListItem> { new SelectListItem { Text = "Administrateur", Value = "admin"},
+                           new SelectListItem { Text = "Utilisateur", Value = "utilisateur"},
+                           new SelectListItem { Text = "Programmateur", Value = "programmateur", Disabled = true}
+                           }, new { @class = "form-control col-8" })
+                }
+                else
+                {
+                    @Html.EditorFor(model => model.type, new { htmlAttributes = new { @class = "form-control col-8", @readonly = "readonly" } })
+                }
+                @Html.ValidationMessageFor(model => model.type, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            @if (Session["type"].Equals("admin"))
+            {
+                @Html.ActionLink("Retour", "Index", null, new { @class = "btn btn-dark" })
+            }
+            else
+            {
+                @Html.ActionLink("Retour à l'accueil", "Index", "Home", null, new { @class = "btn btn-dark" })
+            }
+            <input type="submit" value="Save" class="btn btn-success" />
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

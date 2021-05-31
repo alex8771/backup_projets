@@ -1,0 +1,57 @@
+﻿@model IEnumerable<CinemasFAST.Models.supplement>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.C3d)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ultra_avx)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.dbox)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.imax)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.salle.taille_ecran)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.C3d)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ultra_avx)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.dbox)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.imax)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.salle.taille_ecran)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
+            @Html.ActionLink(" ", " ", new { id=item.id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id })
+        </td>
+    </tr>
+}
+
+</table>

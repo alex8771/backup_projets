@@ -1,0 +1,70 @@
+﻿@model IEnumerable<CinemasFAST.Models.seance>
+@{
+    ViewBag.Title = "Séances";
+    int i = 0;
+}
+    <div class="scrollable">
+        <table class="table table-light table-striped table-hover sortable">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.heure_debut)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.heure_fin)
+                    </th>
+                    <th data-defaultsort="asc">
+                        @Html.DisplayNameFor(model => model.nom_seance)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Filmisprincipal)
+                    </th>
+                    <th data-defaultsort="disabled"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in ViewBag.Seance)
+                {
+                    <tr>
+                        <td>
+                            @item.heure_debut
+                        </td>
+                        <td>
+                            @item.heure_fin
+                        </td>
+                        <td>
+                            @item.nom_seance
+                            
+                        </td>
+                        <td>
+                            @foreach(var v in ViewBag.Presentation)
+                            {
+                                if(v.isprincipal ==true && item.id == v.id_seance)
+                                {
+                                    foreach(var film in ViewBag.Films)
+                                    {
+                                        if(film.id==v.id_film)
+                                        {
+                                            @film.titre
+                                        }
+                                    }
+                                }
+                            }
+                        </td>
+                        <td>
+                            @Html.ActionLink(" ", "Edit", new { id = item.id }, new { @class = "btn btn-info btn-sm fa fa-info-circle" })
+                            @Html.ActionLink(" ", "DeleteSeanceEstpresente", new { id = item.id }, new { @class = "btn btn-danger btn-sm fa fa-trash", @onclick = "return confirm('Voulez-vous supprimer cette séance?');" })
+                        </td>
+                    </tr>
+                    i++;
+                }
+
+                @if (i == 0)
+                {
+                    <tr>
+                        <td colspan="4" class="font-italic h4 text-secondary">Ajouter une séance afin qu'elle soit affichée ici.</td>
+                    </tr>
+                }
+            </tbody>
+            </table>
+    </div>

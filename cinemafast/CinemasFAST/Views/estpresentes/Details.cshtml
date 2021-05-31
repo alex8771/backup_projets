@@ -1,0 +1,42 @@
+﻿@model CinemasFAST.Models.estpresente
+
+@{
+    ViewBag.Title = " ";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>estpresente</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.isprincipal)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.isprincipal)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.seance.nom_seance)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.seance.nom_seance)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.film.titre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.film.titre)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

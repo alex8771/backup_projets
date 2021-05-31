@@ -1,0 +1,56 @@
+﻿@model CinemasFAST.Models.salle
+
+@{
+    ViewBag.Title = " ";
+}
+
+<h2>Details</h2>
+
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.numero)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.numero)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.nbr_places)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nbr_places)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.taille_ecran)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.taille_ecran)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.exploitable)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.exploitable)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cinema.nom)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cinema.nom)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

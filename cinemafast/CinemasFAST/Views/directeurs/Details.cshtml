@@ -1,0 +1,27 @@
+﻿@model CinemasFAST.Models.RolesDirections_ViewModel
+
+@{
+    ViewBag.Title = " ";
+}
+
+    <div class="jumbotron">
+        <h2>Details</h2>
+        @if (ViewBag.erreur == "Succes")
+        {
+            <h4 class="text-success">Directeur modifié avec succès!</h4>
+        }
+    </div>
+
+<div>
+    @Html.Partial("~/Views/directeurs/_Edit.cshtml", Model.Directeur)
+</div>
+
+<div class="jumbotron">
+    <h4>Films dirigés</h4>
+</div>
+
+<div>
+    @Html.Partial("~/Views/directions/_Index.cshtml", Model.Directions)
+</div>
+
+

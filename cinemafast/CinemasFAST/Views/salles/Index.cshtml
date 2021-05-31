@@ -1,0 +1,68 @@
+﻿@model IEnumerable<CinemasFAST.Models.salle>
+
+@{
+    ViewBag.Title = "Index";
+    string nomCinema = null;
+    int idCinema = 0;
+
+    
+    foreach (var item in Model)
+    {
+        if (item != null)
+        {
+            nomCinema = item.cinema.nom;
+            idCinema = item.cinema.id;
+            break;
+        }
+    }
+}
+
+<h2>Liste des salles @nomCinema</h2>
+
+<p>
+    @Html.ActionLink("Ajouter une salle", "Create", new { id = idCinema, nom = nomCinema })
+</p>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.numero)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.nbr_places)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.taille_ecran)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.exploitable)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.numero)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.nbr_places)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.taille_ecran)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.exploitable)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
+                @Html.ActionLink(" ", " ", new { id = item.id }) |
+                @Html.ActionLink(" ", "Delete", new { id = item.id, cinema = item.id_cinema }, new { onclick = "return confirm('Voulez-vous supprimer cette salle?');" }))
+            </td>
+        </tr>
+    }
+</table>
+
+
+

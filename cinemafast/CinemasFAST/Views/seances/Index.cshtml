@@ -1,0 +1,39 @@
+﻿@model CinemasFAST.Models.Seances_ViewModel
+
+@{
+    ViewBag.Title = "Seances";
+
+}
+    <div class="jumbotron">
+        <h2>Seances <span class="bg-dark rounded text-warning p-2 float-right shadow">Cinéma @Session["nomCinemaActuel"], salle @Session["numeroSalleActuelle"] </span></h2>
+        <h4>
+            @ViewBag.date
+        </h4>
+
+        @if (ViewBag.erreur == "fail")
+        {
+            <h4 class="text-danger">Impossible, il y a déjà une représentation durant cette période.</h4>
+        }
+        else if (ViewBag.erreur == "succes")
+        {
+            <h4 class="text-success">La séance a été créée avec succès!</h4>
+        }
+    </div>
+
+<div class="d-flex justify-content-start">
+    @Html.Partial("~/Views/seances/Create.cshtml", Model.Seance)
+    @Html.Partial("~/Views/seances/Recherche.cshtml", Model.Seance)
+</div>
+
+<div>
+    @Html.Partial("~/Views/seances/_Index.cshtml", Model.Seances)
+</div>
+
+<div>
+    @Html.ActionLink("Retour", "Edit", "cinemas", new { id = Session["idCinemaActuel"] }, new { @class = "btn btn-dark" })
+</div>
+@{
+
+    //Permet d'effacer le message d'erreur si on reload ou change de page.
+    Session["createErreurSeance"] = "";
+}

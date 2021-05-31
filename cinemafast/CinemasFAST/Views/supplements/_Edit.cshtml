@@ -1,0 +1,80 @@
+﻿@model CinemasFAST.Models.supplement
+
+
+@using (Html.BeginForm("Edit", "supplements"))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="jumbotron col-12 py-3">
+        <h4>Suppléments</h4>
+        <hr />
+        @if (ViewBag.erreur == "SuccesSupplement")
+        {
+            <h4 class="text-success">Suppléments modifiés avec succès!</h4>
+        }
+    </div>
+
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.id)
+
+            <div class="form-group d-flex row ml-2">
+                @Html.LabelFor(model => model.C3d, htmlAttributes: new { @class = "control-label col-md-8" })
+                <div class="col-md-2">
+                    <div class="checkbox">
+                        @Html.EditorFor(model => model.C3d)
+                        @Html.ValidationMessageFor(model => model.C3d, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group d-flex row ml-2">
+                @Html.LabelFor(model => model.ultra_avx, htmlAttributes: new { @class = "control-label col-md-8" })
+                <div class="col-md-2">
+                    <div class="checkbox">
+                        @Html.EditorFor(model => model.ultra_avx)
+                        @Html.ValidationMessageFor(model => model.ultra_avx, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group d-flex row ml-2">
+                @Html.LabelFor(model => model.dbox, htmlAttributes: new { @class = "control-label col-md-8" })
+                <div class="col-md-2">
+                    <div class="checkbox">
+                        @Html.EditorFor(model => model.dbox)
+                        @Html.ValidationMessageFor(model => model.dbox, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group d-flex row ml-2">
+                @Html.LabelFor(model => model.imax, htmlAttributes: new { @class = "control-label col-md-8" })
+                <div class="col-md-2">
+                    <div class="checkbox">
+                        @Html.EditorFor(model => model.imax)
+                        @Html.ValidationMessageFor(model => model.imax, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="form-group d-none">
+                @Html.LabelFor(model => model.id_salle, htmlAttributes: new { @class = "control-label col-md-6" })
+                <div class="col-md-2">
+                    <div class="checkbox">
+                        @Html.EditorFor(model => model.id_salle)
+                        @Html.ValidationMessageFor(model => model.id_salle, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10 d-flex justify-content-center pl-5">
+                    <input type="submit" value="Enregistrer" class="btn btn-primary px-5" />
+                </div>
+            </div>
+        </div>
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+

@@ -1,0 +1,30 @@
+﻿@{
+    var controller = HttpContext.Current.Request.RequestContext.RouteData.Values["Controller"].ToString();
+    var nonMembre = "~/Views/Shared/_LayoutLoggedOut.cshtml";
+    var membre = "~/Views/Shared/_LayoutLoggedIn.cshtml";
+
+    /* 
+     * On peut gérer l'affichage de différents layouts selon le type d'utilisateur qui consulte le site.
+     * La gestion d'affichage des pages dans les controleurs doivent se faire via les views directement.
+     * Ex : Un utilisateur (non admin) connecté qui veut consulter la page Index de Profils, une condition
+     * est définie.
+     */
+
+
+    if (controller == "Home")
+    {
+        if (Session["login"] != null)
+        {
+            /* Si un utilisateur est connecté et qu'il consulte les pages dans Home, affiche quand même le layout Logged In */
+            Layout = Session["type"].Equals("admin") ? membre : membre;
+        }
+        else
+        {
+            Layout = nonMembre;
+        }
+    }
+    else
+    {
+        Layout = membre;
+    }
+}

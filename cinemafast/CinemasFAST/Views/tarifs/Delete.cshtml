@@ -1,0 +1,88 @@
+﻿@model CinemasFAST.Models.tarif
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>tarif</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.prix_adulte)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.prix_adulte)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.prix_enfant)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.prix_enfant)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.prix_aine)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.prix_aine)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.prix_3d)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.prix_3d)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.prix_ultra_avx)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.prix_ultra_avx)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.prix_dbox)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.prix_dbox)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.prix_imax)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.prix_imax)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cinema.nom)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cinema.nom)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

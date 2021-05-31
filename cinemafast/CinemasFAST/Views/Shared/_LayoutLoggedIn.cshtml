@@ -1,0 +1,108 @@
+﻿@{
+    if (Session["login"] == null)
+    {
+        try
+        {
+            Response.Redirect("~/Home/Login");
+        }
+        catch (Exception e)
+        {
+            System.Diagnostics.Debug.WriteLine(e.Message);
+        }
+    }
+    ViewBag.controller = HttpContext.Current.Request.RequestContext.RouteData.Values["Controller"].ToString();
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Cinéma FAST</title>
+    <link rel="shortcut icon" type="image/png" href="@Url.Content("~/Content/favicon.png")" />
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body class="bg-light">
+    <nav class="navbar navbar-expand-sm navbar-dark fixed-top bg-dark">
+        <div class="container d-flex">
+            <a href="@Url.Action("Index", "Home")" class="mr-3 ml-n3">
+                <img src="@Url.Content("~/Uploads/MCgH6s2.png")" alt="Logo du Cinéma" height="40" />
+            </a>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav mr-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Administration
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <h5 class="nav-header bg-secondary text-light mt-0">Listes d'objets</h5>
+                            @Html.ActionLink("Cinémas", "Index", "cinemas", null, new { @class = "nav-link nav-hover text-dark" })
+                            @Html.ActionLink("Films", "Index", "films", null, new { @class = "nav-link nav-hover text-dark" })
+                            @Html.ActionLink("Directeurs", "Index", "directeurs", null, new { @class = "nav-link text-dark nav-hover" })
+                            @Html.ActionLink("Acteurs", "Index", "acteurs", null, new { @class = "nav-link text-dark nav-hover" })
+
+                            @if (Session["id"] != null && Session["type"].Equals("admin"))
+                            {
+                                <h5 class="nav-header mt-0 bg-secondary text-light">Outils administrateur</h5>
+                                @Html.ActionLink("Liste des comptes", "Index", "profils", null, new { @class = "nav-link text-dark nav-hover" })
+                                @Html.ActionLink("Créer un compte", "Create", "profils", null, new { @class = "nav-link text-dark nav-hover" })
+                            }
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="navbar-collapse collapse flex-row-reverse col-1">
+                <ul class="nav navbar-nav mr-auto">
+                    <li class="nav-item dropdown">
+                        <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Bonjour, @if (Session["login"] != null)
+                            {@Session["login"].ToString().Split(' ')[0]}
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            @Html.ActionLink("Mon compte", "Edit", "profils", new { id = Session["id"] }, new { @class = "nav-link text-dark nav-hover" })
+                            <a href="#" data-toggle="modal" , data-target="#modalDeconnexion" class="nav-link text-dark nav-hover">Déconnexion</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    @*Déconnexion*@
+    <div class="modal fade" id="modalDeconnexion" tabindex="-1" role="dialog" aria-labelledby="CenterTitle"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="LongTitle1">Déconnexion</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <h5 class="text-black-50">Voulez-vous vraiment vous déconnecter?</h5>
+                </div>
+
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" data-dismiss="modal">Non</button>
+                    @Html.ActionLink("Oui", "Disconnect", "Home", null, new { @class = "btn btn-primary" })
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container body-content bg-white pb-3 rounded shadow shadow-sm">
+        @RenderBody()
+    </div>
+    <footer class="container body-content">
+        <p class="text-black-50 pt-3">&copy; @DateTime.Now.Year - Cinéma FAST</p>
+    </footer>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+
+    @RenderSection("scripts", false)
+</body>
+</html>

@@ -1,0 +1,63 @@
+﻿@model CinemasFAST.Models.cinema
+
+@using (Html.BeginForm("Create", "cinemas"))
+{
+    <div class="modal fade" id="cinemaCreate" tabindex="-1" role="dialog" aria-labelledby="Longtitle3"
+         aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="Longtitle3">Ajouter un cinéma</h5>                    
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="d-flex row table-light mb-4">
+                        <div class="form-horizontal col-12">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.nom, htmlAttributes: new { @class = "control-label col-md-12" })
+                                <div class="col-md-12">
+                                    @Html.EditorFor(model => model.nom, new { htmlAttributes = new { @class = "form-control col-12" } })
+                                    @Html.ValidationMessageFor(model => model.nom, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.adresse, htmlAttributes: new { @class = "control-label col-md-12" })
+                                <div class="col-md-12">
+                                    @Html.EditorFor(model => model.adresse, new { htmlAttributes = new { @class = "form-control col-12" } })
+                                    @Html.ValidationMessageFor(model => model.adresse, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.telephone, htmlAttributes: new { @class = "control-label col-md-12" })
+                                <div class="col-md-12">
+                                    @Html.EditorFor(model => model.telephone, new { htmlAttributes = new { @class = "form-control col-12" } })
+                                    @Html.ValidationMessageFor(model => model.telephone, "", new { @class = "text-danger" })
+                                </div>
+                            </div>                            
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="submit" value="Ajouter" class="btn btn-success" />
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+
+@{
+    // Permet d'effacer le message d'erreur si on reload ou change de page.
+    Session["createErreur"] = "";
+}

@@ -1,0 +1,70 @@
+﻿@model CinemasFAST.Models.salle
+
+@{
+    ViewBag.Title = "Create";
+}
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="jumbotron">
+        <h2>Ajouter une salle <span class="bg-dark rounded text-warning p-2 float-right shadow">Cinéma @Session["nomCinemaActuel"] </span></h2>
+    </div>
+
+
+    <h4 class="text-danger">@Session["createErreur"]</h4>
+
+    <div class="form-horizontal">
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.numero, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.numero, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.numero, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.nbr_places, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.nbr_places, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.nbr_places, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.taille_ecran, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.taille_ecran, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.taille_ecran, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group" style="display: none;">
+            @Html.LabelFor(model => model.id_cinema, "id_cinema", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.id_cinema)
+                @Html.ValidationMessageFor(model => model.id_cinema, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group mt-2">
+            <div class="col-md-offset-2 col-md-10">
+                @Html.ActionLink("Retour", "Edit", "cinemas", new { id = ViewBag.idCinema }, new { @class = "btn btn-dark" })
+                <input type="submit" value="Ajouter" class="btn btn-success" />
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+@{
+    // Permet d'effacer le message d'erreur si on reload ou change de page.
+    Session["createErreur"] = "";
+}

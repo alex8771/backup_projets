@@ -1,0 +1,121 @@
+﻿@model IEnumerable<CinemasFAST.Models.directeur>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="jumbotron">
+    <h2>Liste des directeurs</h2>
+    @if (ViewBag.erreur == "fail")
+    {
+        <h4 class="text-danger">Le formulaire de création du directeur n'a pas été bien rempli.</h4>
+    }
+    else if (ViewBag.erreur == "succes")
+    {
+        <h4 class="text-success">Directeur ajouté avec succès!</h4>
+    }
+    else if (ViewBag.erreur == "succesDelete")
+    {
+        <h4 class="text-success">Directeur supprimé!</h4>
+    }
+</div>
+
+@using (Html.BeginForm())
+{
+    if (ViewBag.searchRequest == null || !ViewBag.searchRequest)
+    {
+        <div class="col-12 d-flex">
+            @Html.TextBox("SearchString", null, new { @class = "form-control col-5 mr-2", placeholder = "Rechercher par le prénom ou le nom" })
+            <input type="submit" value="Lancer la recherche" class="btn btn-primary" />
+        </div>
+    }
+    else
+    {
+        <div class="col-12 d-flex">
+            <input type="submit" value="Afficher la liste complète" class="btn btn-primary" />
+        </div>
+    }
+}
+
+
+<div class="scrollable">
+    <table class="table table-light table-striped table-hover sortable">
+        <thead>
+            <tr>
+                <th data-defaultsort="asc">
+                    @Html.DisplayNameFor(model => model.nom)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.langue)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.date_naissance)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.lieu_naissance)
+                </th>
+                <th data-defaultsort="disabled"></th>
+                <th data-defaultsort="disabled"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.prenom)
+                        @Html.DisplayFor(modelItem => item.nom)
+                    </td>
+                    <td>
+                        @if (String.Concat(item.langue).Equals("À ajouter"))
+                        {
+                            <div class="text-danger font-weight-bold" title="Veuillez changer la langue parlée du directeur">
+                                @Html.DisplayFor(modelItem => item.langue)
+                            </div>
+                        }
+                        else
+                        {
+                            @Html.DisplayFor(modelItem => item.langue)
+                        }
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.date_naissance)
+                    </td>
+                    <td>
+                        @if (String.Concat(item.langue).Equals("À ajouter"))
+                        {
+                            <div class="text-danger font-weight-bold" title="Veuillez changer le lieu de naissance du directeur">
+                                @Html.DisplayFor(modelItem => item.lieu_naissance)
+                            </div>
+                        }
+                        else
+                        {
+                            @Html.DisplayFor(modelItem => item.lieu_naissance)
+                        }
+                    </td>
+                    <td>
+                        <img src="@Html.DisplayFor(modelItem => item.image)" alt="" height="100" width="100" />
+                    </td>
+                    <td>
+                        @Html.ActionLink(" ", "Details", new { id = item.id }, new { @class = "btn btn-sm btn-info fa fa-info-circle" })
+                        @Html.ActionLink(" ", "DeleteConfirmed", new { id = item.id }, new { onclick = "return confirm('Voulez-vous supprimer ce directeur?');", @class = "btn btn-sm btn-danger fa fa-trash" })
+                    </td>
+                </tr>
+            }
+
+            @if (Model.Count() == 0)
+            {
+                <tr>
+                    <td colspan="4" class="font-italic h4 text-secondary">Aucun directeur n'a été trouvé selon votre recherche.</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<hr />
+<p>
+    <button type="button" class="btn btn-dark">@Html.ActionLink("Retour à l'accueil", "Index", "Home")</button>
+    <input type="button" value="Ajouter un directeur" class="btn btn-success"
+           data-toggle="modal" data-target="#directeurCreate" />
+</p>

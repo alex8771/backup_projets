@@ -1,0 +1,65 @@
+﻿@model CinemasFAST.Models.seance
+
+@{
+    ViewBag.Title = " ";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>seance</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.heure_debut)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.heure_debut)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.heure_fin)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.heure_fin)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.nom_seance)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nom_seance)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.film.titre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.film.titre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.salle.taille_ecran)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.salle.taille_ecran)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.salle.id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.salle.id)
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

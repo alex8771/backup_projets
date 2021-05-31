@@ -1,0 +1,73 @@
+﻿@model IEnumerable<CinemasFAST.Models.role>
+@{
+    var controller = HttpContext.Current.Request.RequestContext.RouteData.Values["Controller"].ToString();
+}
+
+    <div class="scrollable">
+        <table class="table table-light table-striped table-hover sortable">
+            <thead>
+                <tr>
+                    @if (!controller.Equals("acteurs"))
+                    {
+                        <th>
+                            @Html.DisplayNameFor(model => model.acteur.nom)
+                        </th>
+                    }
+                    <th>
+                        @Html.DisplayNameFor(model => model.nom_personnage)
+                    </th>
+                    @if (controller.Equals("acteurs"))
+                    {
+                        <th>
+                            @Html.DisplayNameFor(model => model.film)
+                        </th>
+                    }
+                    <th data-defaultsort='disabled'></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        @if (!controller.Equals("acteurs"))
+                        {
+                            <td>
+                                <u>
+                                    @Html.ActionLink(item.acteur.prenom + " " + item.acteur.nom, "Details", "acteurs", new { id = item.id_acteur }, new { @class = "text-dark" })
+                                </u>
+                            </td>
+                        }
+                        <td>
+                            @Html.DisplayFor(modelItem => item.nom_personnage)
+                        </td>
+                        @if (controller.Equals("acteurs"))
+                        {
+                            <td>
+                                @Html.DisplayFor(model => item.film.titre)
+                            </td>
+                        }
+                        <td>
+                            @Html.ActionLink(" ", "deleteRole", new { id = item.id }, new { @class = "btn btn-sm btn-danger fa fa-trash", @onclick = "return confirm('Voulez-vous supprimer ce cinéma?');" })
+                        </td>
+                    </tr>
+                }
+
+                @if (Model.Count() == 0)
+                {
+                    if (!controller.Equals("acteurs"))
+                    {
+                        <tr>
+                            <td colspan="4" class="font-italic h5 text-secondary">Ajouter un rôle afin qu'il soit affiché ici.</td>
+                        </tr>
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="4" class="font-italic h5 text-secondary">Cet acteur a joué dans aucun film pour le moment.</td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+

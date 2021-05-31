@@ -1,0 +1,92 @@
+﻿@model IEnumerable<CinemasFAST.Models.salle>
+@{
+    ViewBag.Title = "Index";
+
+    string classe = "", texte_information = "";
+
+    switch (ViewBag.erreur)
+    {
+        case "SuccesSalle":
+            classe = "text-success";
+            texte_information = "Salle ajoutée avec succès!";
+            break;
+        case "SuccesDelete":
+            classe = "text-success";
+            texte_information = "Salle supprimée!";
+            break;
+
+        case "FailSalle":
+            classe = "text-danger";
+            texte_information = "Une salle avec ce numéro existe déja!";
+            break;
+        case "FailDelete":
+            classe = "text-danger";
+            texte_information = "Cette salle ne peut pas être supprimée, une séance est prévue à l'horaire.";
+            break;
+    }
+}
+<div class="jumbotron">
+    <h2>Liste des salles <span class="bg-dark rounded text-warning float-right p-2 shadow">Cinéma @Session["nomCinemaActuel"]</span></h2>
+    <h4 class=@classe>@texte_information</h4>
+</div>
+
+<div class="scrollable">
+    <table class="table table-light table-striped table-hover sortable">
+        <thead>
+            <tr>
+                <th data-defaultsort="asc">
+                    @Html.DisplayNameFor(model => model.numero)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.nbr_places)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.taille_ecran)
+                </th>
+                <th data-defaultsort='disabled'>
+                    @Html.DisplayNameFor(model => model.exploitable)
+                </th>
+                <th data-defaultsort='disabled'></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.numero)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.nbr_places)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.taille_ecran)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.exploitable)
+                    </td>
+                    <td>
+                        @Html.ActionLink(" ", "Edit", "salles", new { id = item.id }, new { @class = "btn btn-sm btn-info fa fa-info-circle" })
+                        @Html.ActionLink(" ", "Index", "seances", new { id = item.id }, new { @class = "btn btn-sm btn-warning fa fa-film" })
+                        @Html.ActionLink(" ", "Delete", "salles", new { id = item.id, cinema = item.id_cinema }, new { @class = "btn btn-sm btn-danger fa fa-trash", @onclick = "return confirm('Voulez-vous supprimer ce cinéma?');" })
+                    </td>
+                </tr>
+            }
+
+            @if (Model.Count() == 0)
+            {
+                <tr>
+                    <td colspan="4" class="font-italic h4 text-secondary">Ajouter une salle afin qu'elle soit affichée ici.</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
+<div class="mb-3">
+
+    <input type="button" value="Ajouter une salle" class="btn btn-success"
+           data-toggle="modal" data-target="#salleCreate" />
+</div>
+

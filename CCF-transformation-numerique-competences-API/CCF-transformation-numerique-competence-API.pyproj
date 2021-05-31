@@ -1,0 +1,67 @@
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>55643a28-8f46-4322-b31a-f4e7e1434ac8</ProjectGuid>
+    <ProjectHome>.</ProjectHome>
+    <StartupFile>
+    </StartupFile>
+    <SearchPath>
+    </SearchPath>
+    <WorkingDirectory>.</WorkingDirectory>
+    <OutputPath>.</OutputPath>
+    <Name>CCF-transformation-numerique-competence-API</Name>
+    <RootNamespace>CCF-transformation-numerique-competence-API</RootNamespace>
+    <InterpreterId>CondaEnv|CondaEnv|env</InterpreterId>
+    <TestFramework>Pytest</TestFramework>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugSymbols>true</DebugSymbols>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="client_python\job_offer_api.py" />
+    <Compile Include="client_python\OptionCarriereAPI.py" />
+    <Compile Include="main.py" />
+    <Compile Include="option_carriere_api_mock.py" />
+    <Compile Include="test\mock\option_carriere_api_mock.py" />
+    <Compile Include="test\mock\__init__.py" />
+    <Compile Include="test\test_option_carriere_api.py" />
+    <Compile Include="test\__init__.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include=".pylintrc" />
+    <Content Include="config\config.yaml" />
+    <Content Include="config\sites\option-carriere.yaml" />
+    <Content Include="requirements.txt" />
+    <Content Include="test\mock\__pycache__\option_carriere_api_mock.cpython-37.pyc" />
+    <Content Include="test\mock\__pycache__\__init__.cpython-37.pyc" />
+    <Content Include="test\__pycache__\test_option_carriere_api.cpython-37-pytest-5.4.3.pyc" />
+    <Content Include="test\__pycache__\__init__.cpython-37.pyc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="client_python\" />
+    <Folder Include="config\" />
+    <Folder Include="config\sites\" />
+    <Folder Include="test\" />
+    <Folder Include="test\mock\" />
+    <Folder Include="test\mock\__pycache__\" />
+    <Folder Include="test\__pycache__\" />
+  </ItemGroup>
+  <ItemGroup>
+    <InterpreterReference Include="CondaEnv|CondaEnv|env" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
+  <!-- Uncomment the CoreCompile target to enable the Build command in
+       Visual Studio and specify your pre- and post-build commands in
+       the BeforeBuild and AfterBuild targets below. -->
+  <!--<Target Name="CoreCompile" />-->
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+</Project>

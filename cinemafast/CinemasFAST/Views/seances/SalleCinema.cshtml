@@ -1,0 +1,47 @@
+﻿@model IEnumerable<CinemasFAST.Models.seance>
+
+@{
+    ViewBag.Title = "Salle";
+}
+<div class="list">
+    <h2>SalleCinema</h2>
+</div>
+
+<table class="table">
+    <tr>
+        <th>
+            Numéro de salle
+        </th>
+        <th>
+            Nombre de place
+        </th>
+        <th>
+            Salle exploitable (True / False)
+        </th>
+        <th>
+            Séances de cette salle
+        </th>
+    </tr>
+    @foreach (var item in ViewBag.Salle)
+    {
+        <tr>
+            <td>
+                @item.numero
+            </td>
+            <td>
+                @item.nbr_places
+            </td>
+            <td>
+                @item.exploitable
+            </td>
+            @if (item.exploitable == true)
+            {
+                <td>
+                    @Html.ActionLink("Séances", "Seances", new { id = item.id })
+                </td>
+            }
+            <br />
+        </tr>
+    }
+
+</table>

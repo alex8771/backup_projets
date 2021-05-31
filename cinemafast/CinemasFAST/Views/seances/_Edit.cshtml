@@ -1,0 +1,77 @@
+﻿@model CinemasFAST.Models.seance
+
+@{ ViewBag.Title = "Edit"; }
+
+<script src="~/Scripts/jquery-3.5.1.js"></script>
+<script src="~/Scripts/jquery-ui-1.8.11.js"></script>
+<link href="~/Content/jquery.datetimepicker.css" rel="stylesheet" />
+<script src="~/Scripts/jquery.datetimepicker.js"></script>
+
+<script type="text/javascript">
+    var $j = jQuery.noConflict();
+    $j(document).ready(function () {
+        $j('input[type=datetime]').datetimepicker({
+            step: 10,
+            minTime: '11:50',
+            maxTime: '23:00'
+        });
+    });
+</script>
+
+@using (Html.BeginForm("Edit", "seances"))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="jumbotron">
+        <h4> Séance </h4>
+        @if (ViewBag.erreur)
+        {
+            <h4 class="text-danger">Impossible de planifier ces séances, il y a un conflit d'horaire avec d'autres séances.</h4>
+        }
+    </div>
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.id)
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.heure_debut, htmlAttributes: new { @class = "control-label col-md-12" })
+        <div class="col-md-12">
+            @Html.EditorFor(model => model.heure_debut, new { htmlAttributes = new { @class = "form-control col-12" } })
+            @Html.ValidationMessageFor(model => model.heure_debut, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.nom_seance, htmlAttributes: new { @class = "control-label col-md-12" })
+        <div class="col-md-12">
+            @Html.DropDownList("nom_seance", new List<SelectListItem>
+                                 { new SelectListItem { Text = "Présentation régulière", Value = "Présentation régulière", Selected=true},
+                                   new SelectListItem { Text = "Présentation spéciale", Value = "Présentation spéciale"},
+                                   new SelectListItem { Text = "Avant-première", Value = "Avant-première"},
+                                   new SelectListItem { Text = "Séance privée", Value = "Séance privée"},
+                                   new SelectListItem { Text = "Film étranger", Value = "Film étranger"},
+                                   new SelectListItem { Text = "Cinéma d'ici", Value = "Cinéma d'ici"},
+                                   new SelectListItem { Text = "Les pros du court-métrage", Value = "Les pros du court-métrage"},
+                                   new SelectListItem { Text = "Lundi yoopi", Value = "Lundi yoopi"},
+                                   new SelectListItem { Text = "Mardis en folie", Value = "Mardis en folie"},
+                                   new SelectListItem { Text = "Mercredi amène ta bière", Value = "Mercredi amène ta bière"},
+                                   new SelectListItem { Text = "Jeudi sans amis", Value = "Jeudi sans amis"},
+                                   new SelectListItem { Text = "Vendredi fou", Value = "Vendredi fou"},
+                                   new SelectListItem { Text = "Samedi confettis", Value = "Samedi confettis"},
+                                   new SelectListItem { Text = "Le dimanche Saint", Value = "Le dimanche Saint"},
+                                   }, new { @class = "form-control col-12" })
+            @Html.ValidationMessageFor(model => model.nom_seance, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="d-flex col-12">
+            <input type="submit" value="Enregistrer" class="btn btn-success mr-2 py-n0" />
+            @Html.ActionLink("Récurrente (7 jours)", "CreateSemaine", new { id = Model.id }, new { @class = "btn btn-secondary" })
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+

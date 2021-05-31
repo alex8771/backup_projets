@@ -1,0 +1,51 @@
+﻿@model CinemasFAST.Models.RolesDirections_ViewModel
+
+@{
+    ViewBag.Title = " ";
+}
+
+    <div class="jumbotron">
+        <h2>Film <span class="bg-dark rounded text-warning p-2 float-right shadow">@ViewBag.film_actuel </span></h2>
+        <h4 class="text-danger">@Session["roleErreur"]</h4>
+        <h4 class="text-success">@Session["editSuccess"]</h4>
+    </div>
+
+<div class="d-flex row">
+    <div class="col-7">
+        @Html.Partial("~/Views/films/_Edit.cshtml", Model.Film)
+    </div>
+
+    <div class="col-5">
+
+        <div class="child-sticky">
+            <div class="jumbotron">
+                <h4>Directeur</h4>
+            </div>
+
+            <div>
+                @Html.Partial("~/Views/directions/_Index.cshtml", Model.Directions)
+            </div>
+
+            <div>
+                @Html.Partial("~/Views/directions/_Create.cshtml", Model.Direction)
+            </div>
+
+            <div class="jumbotron">
+                <h4>Roles</h4>
+            </div>
+
+            <div>
+                <div>
+                    @Html.Partial("~/Views/roles/_Index.cshtml", Model.Roles)
+                </div>
+                <div>
+                    @Html.Partial("~/Views/roles/_Create.cshtml", Model.Role)
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@{
+    Session["roleErreur"] = "";
+}

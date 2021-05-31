@@ -1,0 +1,45 @@
+﻿@model IEnumerable<CinemasFAST.Models.estpresente>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.isprincipal)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.seance.nom_seance)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.film.titre)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.isprincipal)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.seance.nom_seance)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.film.titre)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
+            @Html.ActionLink(" ", " ", new { id=item.id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id })
+        </td>
+    </tr>
+}
+
+</table>

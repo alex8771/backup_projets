@@ -1,0 +1,70 @@
+﻿@model IEnumerable<CinemasFAST.Models.direction>
+@{
+    var controller = HttpContext.Current.Request.RequestContext.RouteData.Values["Controller"].ToString();
+}
+
+    <div class="scrollable">
+        <table class="table table-light table-striped table-hover sortable">
+            <thead>
+                <tr>
+                    @if (!controller.Equals("directeurs"))
+                    {
+                        <th>
+                            @Html.DisplayNameFor(model => model.directeur.nom)
+                        </th>
+                    }
+
+                    @if (controller.Equals("directeurs"))
+                    {
+                        <th>
+                            @Html.DisplayNameFor(model => model.film)
+                        </th>
+                    }
+                    <th data-defaultsort="disabled"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                <tr>
+                    @if (!controller.Equals("directeurs"))
+                    {
+                        <td>
+                            <u>
+                                @Html.ActionLink(item.directeur.prenom + " " + item.directeur.nom, "Details", "directeurs", new { id = item.id_directeur }, new { @class = "text-dark" })
+                            </u>
+                        </td>
+                    }
+
+                    @if (controller.Equals("directeurs"))
+                    {
+                        <td>
+                            @Html.DisplayFor(model => item.film.titre)
+                        </td>
+                    }
+
+                    <td>
+                        @Html.ActionLink(" ", "deleteDirection", new { id = item.id }, new { @class = "btn btn-sm btn-danger fa fa-trash", @onclick = "return confirm('Voulez-vous supprimer ce directeur?');" })
+                    </td>
+                </tr>
+                }
+
+                @if (Model.Count() == 0)
+                {
+                    if (!controller.Equals("directeurs"))
+                    {
+                        <tr>
+                            <td colspan="4" class="font-italic h5 text-secondary">Ajouter un directeur afin qu'il soit affiché ici.</td>
+                        </tr>
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="4" class="font-italic h5 text-secondary">Ce directeur a dirigé aucun film pour le moment.</td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+

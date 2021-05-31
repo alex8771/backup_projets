@@ -1,0 +1,25 @@
+﻿@model CinemasFAST.Models.EstPresenter_ViewModel
+
+@{ ViewBag.Title = " "; }
+
+<div class="jumbotron">
+    <h2>Liste des films à la séance @Model.Seance.id <span class="bg-dark rounded text-warning p-2 float-right shadow">Cinéma @Session["nomCinemaActuel"], salle @Session["numeroSalleActuelle"]</span></h2>
+    <h4 class="text-danger">@Session["ErreurAjouterFilmSeance"]</h4>
+</div>
+
+<div class="d-flex col-12">
+    <div class="col-8">
+        @Html.Partial("~/Views/estpresentes/_Index.cshtml", Model.estpresentes)
+    </div>
+
+    <div class="col-4">
+        @Html.Partial("~/Views/seances/_Edit.cshtml", Model.Seance)
+    </div>
+</div>
+
+<div>
+    @Html.Partial("~/Views/estpresentes/_Create.cshtml", Model.estpresente)
+</div>
+
+@{ //Permet d'effacer le message d'erreur si on reload ou change de page.
+    Session["ErreurAjouterFilmSeance"] = ""; }

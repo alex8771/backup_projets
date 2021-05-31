@@ -1,0 +1,73 @@
+﻿@{
+    ViewBag.Title = "Login";
+}
+
+@model CinemasFAST.Models.profil
+
+@using (Html.BeginForm("Login", "Home", FormMethod.Post, new { @class = "" }))
+{
+    <div class="jumbotron mt-n3 mx-0">
+        <h1>Merci!</h1>
+        <p class="lead"> Cela fait déjà plus de 5 semaines que nous travaillons sur ce projet d'envergure.<br /> Nous sommes fier de vous savoir fidèle à nos services après tout ce temps. Milles merci !</p>
+        <div class="d-flex justify-content-center col-12 w-100 px-0 pb-0">
+            <img src="@Url.Content("~/Uploads/53Nuhk7.png")" class="img-fluid w-100" alt="Bannière du Cinéma" />
+        </div>
+    </div>
+
+    <div class="row px-3">
+        <div class="col-md-4">
+            <h2>Gestion des séances</h2>
+            <hr />
+            <p>
+                Avec Cinéma FAST, vous pouvez gérer les séances de vos cinémas en quelques clics. Profitez d'une solution simple et rapide pour
+                vos employés et rentabilisez votre temps! Organisez vos cinémas et vos salles comme vous le souhaitez. Céduler vos séances n'aura jamais été aussi facile!
+            </p>
+        </div>
+        <div class="col-md-4">
+            <h2>Ajout et maintenance</h2>
+            <hr />
+            <p>
+                Via votre barre de navigation, des options rapides sont accessibles afin que vous puissiez ajouter du contenu à porter de main!
+                Besoin d'ajouter des acteurs? Vous avez investi dans la construction d'un nouveau cinéma? En trois clics, c'est fait!
+            </p>
+        </div>
+        <div class="col-md-4">
+            <h2>Fiabilité des données</h2>
+            <hr />
+            <p>
+                Vos données sont en sécurité et bien organisées dans des serveurs hyper sécurisés. Ils sont dans un appartement dont la construction date un peu,
+                mais dont les murs sont en bétons et les fenêtres en PVC. Vous pouvez vous assurez que le taux d'humidité est à son plus bas!
+            </p>
+        </div>
+    </div>
+
+    /* Connexion */
+    <div class="modal fade" id="modalConnexion" tabindex="-1" role="dialog" aria-labelledby="CenterTitle"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="LongTitle1">Connexion</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <div class="form-group">
+                        @Html.TextBoxFor(model => model.username, new { @class = "form-control col-md-12", type = "text", placeholder = "Nom d'utilisateur", required = "required" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.TextBoxFor(model => model.password, new { @class = "form-control col-md-12", type = "password", placeholder = "Mot de passe", required = "required" })
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button class="btn btn-danger" type="reset">Effacer</button>
+                    <button type="submit" class="btn btn-primary">Se connecter</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}

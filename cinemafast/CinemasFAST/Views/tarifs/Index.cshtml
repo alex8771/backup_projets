@@ -1,0 +1,75 @@
+﻿@model IEnumerable<CinemasFAST.Models.tarif>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.prix_adulte)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.prix_enfant)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.prix_aine)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.prix_3d)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.prix_ultra_avx)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.prix_dbox)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.prix_imax)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.cinema.nom)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.prix_adulte)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.prix_enfant)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.prix_aine)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.prix_3d)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.prix_ultra_avx)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.prix_dbox)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.prix_imax)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.cinema.nom)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
+            @Html.ActionLink(" ", " ", new { id=item.id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id })
+        </td>
+    </tr>
+}
+
+</table>

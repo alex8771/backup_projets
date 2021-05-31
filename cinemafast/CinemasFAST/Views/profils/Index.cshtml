@@ -1,0 +1,56 @@
+﻿@model IEnumerable<CinemasFAST.Models.profil>
+
+@{ ViewBag.Title = "Index";
+
+    if (Session["login"] == null || !Session["type"].Equals("admin"))
+    {
+        Response.Redirect("~/Home/Index");
+    } }
+
+<div class="jumbotron">
+    <h2>Gestion des comptes</h2>
+</div>
+
+<div class="scrollable">
+    <table class="table table-light table-striped table-hover sortable">
+        <thead>
+            <tr>
+                <th data-defaultsort="asc">
+                    @Html.DisplayNameFor(model => model.nom_complet)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.username)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.type)
+                </th>
+                <th data-defaultsort='disabled'></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.nom_complet)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.username)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.type)
+    </td>
+    <td>
+        @Html.ActionLink(" ", "Edit", new { id = item.id }, new { @class = "btn btn-sm btn-info fa fa-info-circle" })
+        @Html.ActionLink(" ", "Delete", new { id = item.id }, new { @class = "btn btn-sm btn-danger fa fa-trash" })
+    </td>
+</tr>
+}
+        </tbody>
+    </table>
+</div>
+<hr />
+<p>
+    @Html.ActionLink("Retour à l'accueil", "Index", null, new { @class = "btn btn-dark" })
+    @Html.ActionLink("Créer un compte", "Create", null, new { @class = "btn btn-success" })
+</p>

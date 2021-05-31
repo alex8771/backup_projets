@@ -1,0 +1,78 @@
+﻿@model CinemasFAST.Models.directeur
+
+@using (Html.BeginForm("Edit", "directeurs"))
+{
+    @Html.AntiForgeryToken()
+    <img src="@Html.DisplayFor(modelItem => modelItem.image)" class="float-right shadow border mr-5 mt-4" height="200" width="200" />
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.id)
+    
+    <div class="d-flex row table-light mb-4">
+        <div class="form-horizontal col-6">
+            <div class="form-group col-12">
+                @Html.LabelFor(model => model.nom, htmlAttributes: new { @class = "control-label col-md-12" })
+                <div class="col-md-12">
+                    @Html.EditorFor(model => model.nom, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.nom, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group col-12">
+                @Html.LabelFor(model => model.prenom, htmlAttributes: new { @class = "control-label col-md-12" })
+                <div class="col-md-12">
+                    @Html.EditorFor(model => model.prenom, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.prenom, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group col-12">
+                @Html.LabelFor(model => model.langue, htmlAttributes: new { @class = "control-label col-md-12" })
+                <div class="col-md-10">
+                    @Html.DropDownList("langue", new List<SelectListItem>
+                                         { new SelectListItem { Text = "Anglais", Value = "Anglais", Selected=true},
+                                           new SelectListItem { Text = "Français", Value = "Français"},
+                                           new SelectListItem { Text = "Espagnol", Value = "Espagnol"},
+                                           new SelectListItem { Text = "Italien", Value = "Italien"},
+                                           new SelectListItem { Text = "Mandarin", Value = "Mandarin"},
+                                           new SelectListItem { Text = "Hindustani", Value = "Hindustani"},
+                                           new SelectListItem { Text = "Arabe", Value = "Arabe"},
+                                           new SelectListItem { Text = "Russe", Value = "Russe"},
+                                           new SelectListItem { Text = "Portugais", Value = "Portugais"},
+                                           }, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.langue, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="form-horizontal col-6">
+            <div class="form-group col-12">
+                @Html.LabelFor(model => model.date_naissance, htmlAttributes: new { @class = "control-label col-md-12" })
+                <div class="col-md-12">
+                    @Html.EditorFor(model => model.date_naissance, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.date_naissance, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group col-12">
+                @Html.LabelFor(model => model.lieu_naissance, htmlAttributes: new { @class = "control-label col-md-12" })
+                <div class="col-md-12">
+                    @Html.EditorFor(model => model.lieu_naissance, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.lieu_naissance, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group col-12">
+                @Html.LabelFor(model => model.image, htmlAttributes: new { @class = "control-label col-md-12" })
+                <div class="col-md-12">
+                    @Html.EditorFor(model => model.image, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.image, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <p class="ml-3">
+        <button type="button" class="btn btn-dark">@Html.ActionLink("Retour", "Index")</button>
+        <input type="submit" value="Enregistrer" class="btn btn-success" />
+    </p>
+}
+

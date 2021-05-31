@@ -1,0 +1,55 @@
+﻿@model IEnumerable<CinemasFAST.Models.estpresente>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+<div class="scrollable">
+    <table class="table table-light table-striped table-hover sortable">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.isprincipal)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.seance.nom_seance)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.film.titre)
+                </th>
+                <th data-defaultsort="disabled"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.isprincipal)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.seance.nom_seance)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.film.titre)
+    </td>
+    <td>
+        @Html.ActionLink(" ", "DeleteConfirmed", "estpresentes", new { id = item.id }, new { @class = "btn btn-sm btn-danger fa fa-trash" })
+    </td>
+</tr>
+}
+            @if (Model.Count() == 0)
+            {
+<tr>
+    <td colspan="4" class="font-italic h4 text-secondary">Ajouter un film à la séance afin qu'il soit affiché ici.</td>
+</tr>
+}
+        </tbody>
+    </table>
+</div>
+
+<div class="d-flex mt-3">
+    @Html.ActionLink("Retour", "Index", "seances", new { id = Session["sallecourante"] }, new { @class = "btn btn-dark mr-2" })
+    <input type="button" value="Ajouter un film à la séance" class="btn btn-success"
+           data-toggle="modal" data-target="#presentationCreate" />
+</div>

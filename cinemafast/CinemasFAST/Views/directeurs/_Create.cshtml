@@ -1,0 +1,86 @@
+﻿@model CinemasFAST.Models.directeur
+
+@using (Html.BeginForm("Create", "directeurs"))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="modal fade" id="directeurCreate" tabindex="-1" role="dialog" aria-labelledby="Longtitle3"
+         aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="Longtitle3">Ajouter un cinéma</h5>
+                    <h4 class="text-danger">@Session["createErreur"]</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.nom, htmlAttributes: new { @class = "control-label col-md-12" })
+                        <div class="col-md-12">
+                            @Html.EditorFor(model => model.nom, new { htmlAttributes = new { @class = "form-control col-12" } })
+                            @Html.ValidationMessageFor(model => model.nom, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.prenom, htmlAttributes: new { @class = "control-label col-md-12" })
+                        <div class="col-md-12">
+                            @Html.EditorFor(model => model.prenom, new { htmlAttributes = new { @class = "form-control col-12" } })
+                            @Html.ValidationMessageFor(model => model.prenom, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.langue, htmlAttributes: new { @class = "control-label col-md-12" })
+                        <div class="col-md-12">
+                            @Html.DropDownList("langue", new List<SelectListItem>
+                                                 { new SelectListItem { Text = "Anglais", Value = "Anglais", Selected=true},
+                                                   new SelectListItem { Text = "Français", Value = "Français"},
+                                                   new SelectListItem { Text = "Espagnol", Value = "Espagnol"},
+                                                   new SelectListItem { Text = "Italien", Value = "Italien"},
+                                                   new SelectListItem { Text = "Mandarin", Value = "Mandarin"},
+                                                   new SelectListItem { Text = "Hindustani", Value = "Hindustani"},
+                                                   new SelectListItem { Text = "Arabe", Value = "Arabe"},
+                                                   new SelectListItem { Text = "Russe", Value = "Russe"},
+                                                   new SelectListItem { Text = "Portugais", Value = "Portugais"},
+                                                   }, new { @class = "form-control col-12" })
+                            @Html.ValidationMessageFor(model => model.langue, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.date_naissance, htmlAttributes: new { @class = "control-label col-md-12" })
+                        <div class="col-md-12">
+                            @Html.EditorFor(model => model.date_naissance, new { htmlAttributes = new { @class = "form-control col-12" } })
+                            @Html.ValidationMessageFor(model => model.date_naissance, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.lieu_naissance, htmlAttributes: new { @class = "control-label col-md-12" })
+                        <div class="col-md-12">
+                            @Html.EditorFor(model => model.lieu_naissance, new { htmlAttributes = new { @class = "form-control col-12" } })
+                            @Html.ValidationMessageFor(model => model.lieu_naissance, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.image, htmlAttributes: new { @class = "control-label col-md-12" })
+                        <div class="col-md-12">
+                            @Html.EditorFor(model => model.image, new { htmlAttributes = new { @class = "form-control col-12" } })
+                            @Html.ValidationMessageFor(model => model.image, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="submit" value="Ajouter" class="btn btn-success" />
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

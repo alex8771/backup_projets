@@ -1,0 +1,946 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="cinemadbModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.5" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="acteur">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nom" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="prenom" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="langue" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="date_naissance" Type="date" Nullable="false" />
+          <Property Name="lieu_naissance" Type="varchar" MaxLength="75" Nullable="false" />
+          <Property Name="image" Type="varchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="cinema">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nom" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="adresse" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="telephone" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="id_responsable" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="directeur">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nom" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="prenom" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="langue" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="date_naissance" Type="date" Nullable="false" />
+          <Property Name="lieu_naissance" Type="varchar" MaxLength="75" Nullable="false" />
+          <Property Name="image" Type="varchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="direction">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_directeur" Type="int" Nullable="false" />
+          <Property Name="id_film" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="estpresente">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_film" Type="int" Nullable="false" />
+          <Property Name="id_seance" Type="int" Nullable="false" />
+          <Property Name="isprincipal" Type="bool" Nullable="false" />
+        </EntityType>
+        <EntityType Name="film">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="titre" Type="varchar" MaxLength="75" Nullable="false" />
+          <Property Name="description" Type="varchar" MaxLength="500" />
+          <Property Name="annee" Type="int" />
+          <Property Name="duree" Type="int" Nullable="false" />
+          <Property Name="note" Type="double" />
+          <Property Name="nbr_votes" Type="int" />
+          <Property Name="revenue" Type="double" />
+          <Property Name="id_genre" Type="int" />
+          <Property Name="image" Type="varchar" MaxLength="500" />
+          <Property Name="type" Type="varchar" MaxLength="25" Nullable="false" />
+        </EntityType>
+        <EntityType Name="genre">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nom" Type="varchar" MaxLength="45" Nullable="false" />
+        </EntityType>
+        <EntityType Name="profil">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="username" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="courriel" Type="varchar" MaxLength="75" Nullable="false" />
+          <Property Name="type" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="nom_complet" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="responsable">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nom" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="prenom" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="telephone" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="courriel" Type="varchar" MaxLength="75" Nullable="false" />
+        </EntityType>
+        <EntityType Name="role">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_film" Type="int" Nullable="false" />
+          <Property Name="id_acteur" Type="int" Nullable="false" />
+          <Property Name="nom_personnage" Type="varchar" MaxLength="45" Nullable="false" />
+        </EntityType>
+        <EntityType Name="salle">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="numero" Type="int" Nullable="false" />
+          <Property Name="nbr_places" Type="int" Nullable="false" />
+          <Property Name="taille_ecran" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="exploitable" Type="bool" Nullable="false" />
+          <Property Name="id_cinema" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="seance">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="heure_debut" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="heure_fin" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="nom_seance" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="id_salle" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="supplements">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="3d" Type="bool" Nullable="false" />
+          <Property Name="ultra_avx" Type="bool" Nullable="false" />
+          <Property Name="dbox" Type="bool" Nullable="false" />
+          <Property Name="imax" Type="bool" Nullable="false" />
+          <Property Name="id_salle" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tarifs">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="prix_adulte" Type="double" Nullable="false" />
+          <Property Name="prix_enfant" Type="double" Nullable="false" />
+          <Property Name="prix_aine" Type="double" Nullable="false" />
+          <Property Name="prix_3d" Type="double" Nullable="false" />
+          <Property Name="prix_ultra_avx" Type="double" Nullable="false" />
+          <Property Name="prix_dbox" Type="double" Nullable="false" />
+          <Property Name="prix_imax" Type="double" Nullable="false" />
+          <Property Name="id_cinema" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="idActeurRole">
+          <End Role="acteur" Type="Self.acteur" Multiplicity="1" />
+          <End Role="role" Type="Self.role" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="acteur">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="role">
+              <PropertyRef Name="id_acteur" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="idCinema">
+          <End Role="cinema" Type="Self.cinema" Multiplicity="1" />
+          <End Role="tarifs" Type="Self.tarifs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cinema">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tarifs">
+              <PropertyRef Name="id_cinema" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="idCinemaSalle">
+          <End Role="cinema" Type="Self.cinema" Multiplicity="1" />
+          <End Role="salle" Type="Self.salle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cinema">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="salle">
+              <PropertyRef Name="id_cinema" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="idDirecteurDirection">
+          <End Role="directeur" Type="Self.directeur" Multiplicity="1" />
+          <End Role="direction" Type="Self.direction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="directeur">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="direction">
+              <PropertyRef Name="id_directeur" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="idDSeanceEstPresente">
+          <End Role="seance" Type="Self.seance" Multiplicity="1" />
+          <End Role="estpresente" Type="Self.estpresente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="seance">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="estpresente">
+              <PropertyRef Name="id_seance" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="idFilmDirection">
+          <End Role="film" Type="Self.film" Multiplicity="1" />
+          <End Role="direction" Type="Self.direction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="film">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="direction">
+              <PropertyRef Name="id_film" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="idFilmEstPresente">
+          <End Role="film" Type="Self.film" Multiplicity="1" />
+          <End Role="estpresente" Type="Self.estpresente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="film">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="estpresente">
+              <PropertyRef Name="id_film" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="idFilmRole">
+          <End Role="film" Type="Self.film" Multiplicity="1" />
+          <End Role="role" Type="Self.role" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="film">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="role">
+              <PropertyRef Name="id_film" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="idGenreFilm">
+          <End Role="genre" Type="Self.genre" Multiplicity="0..1" />
+          <End Role="film" Type="Self.film" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="genre">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="film">
+              <PropertyRef Name="id_genre" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="idResponsable">
+          <End Role="responsable" Type="Self.responsable" Multiplicity="1" />
+          <End Role="cinema" Type="Self.cinema" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="responsable">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="cinema">
+              <PropertyRef Name="id_responsable" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="idSalleSeance">
+          <End Role="salle" Type="Self.salle" Multiplicity="1" />
+          <End Role="seance" Type="Self.seance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="salle">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="seance">
+              <PropertyRef Name="id_salle" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="idSalleSupplements">
+          <End Role="salle" Type="Self.salle" Multiplicity="1" />
+          <End Role="supplements" Type="Self.supplements" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="salle">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="supplements">
+              <PropertyRef Name="id_salle" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="cinemadbModelStoreContainer">
+          <EntitySet Name="acteur" EntityType="Self.acteur" Schema="cinemadb3" store:Type="Tables" />
+          <EntitySet Name="cinema" EntityType="Self.cinema" Schema="cinemadb3" store:Type="Tables" />
+          <EntitySet Name="directeur" EntityType="Self.directeur" Schema="cinemadb3" store:Type="Tables" />
+          <EntitySet Name="direction" EntityType="Self.direction" Schema="cinemadb3" store:Type="Tables" />
+          <EntitySet Name="estpresente" EntityType="Self.estpresente" Schema="cinemadb3" store:Type="Tables" />
+          <EntitySet Name="film" EntityType="Self.film" Schema="cinemadb3" store:Type="Tables" />
+          <EntitySet Name="genre" EntityType="Self.genre" Schema="cinemadb3" store:Type="Tables" />
+          <EntitySet Name="profil" EntityType="Self.profil" Schema="cinemadb3" store:Type="Tables" />
+          <EntitySet Name="responsable" EntityType="Self.responsable" Schema="cinemadb3" store:Type="Tables" />
+          <EntitySet Name="role" EntityType="Self.role" Schema="cinemadb3" store:Type="Tables" />
+          <EntitySet Name="salle" EntityType="Self.salle" Schema="cinemadb3" store:Type="Tables" />
+          <EntitySet Name="seance" EntityType="Self.seance" Schema="cinemadb3" store:Type="Tables" />
+          <EntitySet Name="supplements" EntityType="Self.supplements" Schema="cinemadb3" store:Type="Tables" />
+          <EntitySet Name="tarifs" EntityType="Self.tarifs" Schema="cinemadb3" store:Type="Tables" />
+          <AssociationSet Name="idActeurRole" Association="Self.idActeurRole">
+            <End Role="acteur" EntitySet="acteur" />
+            <End Role="role" EntitySet="role" />
+          </AssociationSet>
+          <AssociationSet Name="idCinema" Association="Self.idCinema">
+            <End Role="cinema" EntitySet="cinema" />
+            <End Role="tarifs" EntitySet="tarifs" />
+          </AssociationSet>
+          <AssociationSet Name="idCinemaSalle" Association="Self.idCinemaSalle">
+            <End Role="cinema" EntitySet="cinema" />
+            <End Role="salle" EntitySet="salle" />
+          </AssociationSet>
+          <AssociationSet Name="idDirecteurDirection" Association="Self.idDirecteurDirection">
+            <End Role="directeur" EntitySet="directeur" />
+            <End Role="direction" EntitySet="direction" />
+          </AssociationSet>
+          <AssociationSet Name="idDSeanceEstPresente" Association="Self.idDSeanceEstPresente">
+            <End Role="seance" EntitySet="seance" />
+            <End Role="estpresente" EntitySet="estpresente" />
+          </AssociationSet>
+          <AssociationSet Name="idFilmDirection" Association="Self.idFilmDirection">
+            <End Role="film" EntitySet="film" />
+            <End Role="direction" EntitySet="direction" />
+          </AssociationSet>
+          <AssociationSet Name="idFilmEstPresente" Association="Self.idFilmEstPresente">
+            <End Role="film" EntitySet="film" />
+            <End Role="estpresente" EntitySet="estpresente" />
+          </AssociationSet>
+          <AssociationSet Name="idFilmRole" Association="Self.idFilmRole">
+            <End Role="film" EntitySet="film" />
+            <End Role="role" EntitySet="role" />
+          </AssociationSet>
+          <AssociationSet Name="idGenreFilm" Association="Self.idGenreFilm">
+            <End Role="genre" EntitySet="genre" />
+            <End Role="film" EntitySet="film" />
+          </AssociationSet>
+          <AssociationSet Name="idResponsable" Association="Self.idResponsable">
+            <End Role="responsable" EntitySet="responsable" />
+            <End Role="cinema" EntitySet="cinema" />
+          </AssociationSet>
+          <AssociationSet Name="idSalleSeance" Association="Self.idSalleSeance">
+            <End Role="salle" EntitySet="salle" />
+            <End Role="seance" EntitySet="seance" />
+          </AssociationSet>
+          <AssociationSet Name="idSalleSupplements" Association="Self.idSalleSupplements">
+            <End Role="salle" EntitySet="salle" />
+            <End Role="supplements" EntitySet="supplements" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="cinemadbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="acteur">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nom" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="prenom" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="langue" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="date_naissance" Type="DateTime" Nullable="false" />
+          <Property Name="lieu_naissance" Type="String" MaxLength="75" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="image" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="roles" Relationship="Self.idActeurRole" FromRole="acteur" ToRole="role" />
+        </EntityType>
+        <EntityType Name="cinema">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nom" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="adresse" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="telephone" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="id_responsable" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tarifs" Relationship="Self.idCinema" FromRole="cinema" ToRole="tarifs" />
+          <NavigationProperty Name="salles" Relationship="Self.idCinemaSalle" FromRole="cinema" ToRole="salle" />
+          <NavigationProperty Name="responsable" Relationship="Self.idResponsable" FromRole="cinema" ToRole="responsable" />
+        </EntityType>
+        <EntityType Name="directeur">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nom" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="prenom" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="langue" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="date_naissance" Type="DateTime" Nullable="false" />
+          <Property Name="lieu_naissance" Type="String" MaxLength="75" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="image" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="directions" Relationship="Self.idDirecteurDirection" FromRole="directeur" ToRole="direction" />
+        </EntityType>
+        <EntityType Name="direction">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_directeur" Type="Int32" Nullable="false" />
+          <Property Name="id_film" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="directeur" Relationship="Self.idDirecteurDirection" FromRole="direction" ToRole="directeur" />
+          <NavigationProperty Name="film" Relationship="Self.idFilmDirection" FromRole="direction" ToRole="film" />
+        </EntityType>
+        <EntityType Name="estpresente">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_film" Type="Int32" Nullable="false" />
+          <Property Name="id_seance" Type="Int32" Nullable="false" />
+          <Property Name="isprincipal" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="seance" Relationship="Self.idDSeanceEstPresente" FromRole="estpresente" ToRole="seance" />
+          <NavigationProperty Name="film" Relationship="Self.idFilmEstPresente" FromRole="estpresente" ToRole="film" />
+        </EntityType>
+        <EntityType Name="film">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="titre" Type="String" MaxLength="75" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="annee" Type="Int32" />
+          <Property Name="duree" Type="Int32" Nullable="false" />
+          <Property Name="note" Type="Double" />
+          <Property Name="nbr_votes" Type="Int32" />
+          <Property Name="revenue" Type="Double" />
+          <Property Name="id_genre" Type="Int32" />
+          <Property Name="image" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="type" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="directions" Relationship="Self.idFilmDirection" FromRole="film" ToRole="direction" />
+          <NavigationProperty Name="estpresentes" Relationship="Self.idFilmEstPresente" FromRole="film" ToRole="estpresente" />
+          <NavigationProperty Name="roles" Relationship="Self.idFilmRole" FromRole="film" ToRole="role" />
+          <NavigationProperty Name="genre" Relationship="Self.idGenreFilm" FromRole="film" ToRole="genre" />
+        </EntityType>
+        <EntityType Name="genre">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nom" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="films" Relationship="Self.idGenreFilm" FromRole="genre" ToRole="film" />
+        </EntityType>
+        <EntityType Name="profil">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="username" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="courriel" Type="String" MaxLength="75" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="type" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nom_complet" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="responsable">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nom" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="prenom" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="telephone" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="courriel" Type="String" MaxLength="75" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="cinemas" Relationship="Self.idResponsable" FromRole="responsable" ToRole="cinema" />
+        </EntityType>
+        <EntityType Name="role">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_film" Type="Int32" Nullable="false" />
+          <Property Name="id_acteur" Type="Int32" Nullable="false" />
+          <Property Name="nom_personnage" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="acteur" Relationship="Self.idActeurRole" FromRole="role" ToRole="acteur" />
+          <NavigationProperty Name="film" Relationship="Self.idFilmRole" FromRole="role" ToRole="film" />
+        </EntityType>
+        <EntityType Name="salle">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="numero" Type="Int32" Nullable="false" />
+          <Property Name="nbr_places" Type="Int32" Nullable="false" />
+          <Property Name="taille_ecran" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="exploitable" Type="Boolean" Nullable="false" />
+          <Property Name="id_cinema" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="cinema" Relationship="Self.idCinemaSalle" FromRole="salle" ToRole="cinema" />
+          <NavigationProperty Name="seances" Relationship="Self.idSalleSeance" FromRole="salle" ToRole="seance" />
+          <NavigationProperty Name="supplements" Relationship="Self.idSalleSupplements" FromRole="salle" ToRole="supplements" />
+        </EntityType>
+        <EntityType Name="seance">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="heure_debut" Type="DateTime" Nullable="false" />
+          <Property Name="heure_fin" Type="DateTime" Nullable="false" />
+          <Property Name="nom_seance" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="id_salle" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="estpresentes" Relationship="Self.idDSeanceEstPresente" FromRole="seance" ToRole="estpresente" />
+          <NavigationProperty Name="salle" Relationship="Self.idSalleSeance" FromRole="seance" ToRole="salle" />
+        </EntityType>
+        <EntityType Name="supplement">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="C3d" Type="Boolean" Nullable="false" />
+          <Property Name="ultra_avx" Type="Boolean" Nullable="false" />
+          <Property Name="dbox" Type="Boolean" Nullable="false" />
+          <Property Name="imax" Type="Boolean" Nullable="false" />
+          <Property Name="id_salle" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="salle" Relationship="Self.idSalleSupplements" FromRole="supplements" ToRole="salle" />
+        </EntityType>
+        <EntityType Name="tarif">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="prix_adulte" Type="Double" Nullable="false" />
+          <Property Name="prix_enfant" Type="Double" Nullable="false" />
+          <Property Name="prix_aine" Type="Double" Nullable="false" />
+          <Property Name="prix_3d" Type="Double" Nullable="false" />
+          <Property Name="prix_ultra_avx" Type="Double" Nullable="false" />
+          <Property Name="prix_dbox" Type="Double" Nullable="false" />
+          <Property Name="prix_imax" Type="Double" Nullable="false" />
+          <Property Name="id_cinema" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="cinema" Relationship="Self.idCinema" FromRole="tarifs" ToRole="cinema" />
+        </EntityType>
+        <Association Name="idActeurRole">
+          <End Role="acteur" Type="Self.acteur" Multiplicity="1" />
+          <End Role="role" Type="Self.role" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="acteur">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="role">
+              <PropertyRef Name="id_acteur" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="idCinema">
+          <End Role="cinema" Type="Self.cinema" Multiplicity="1" />
+          <End Role="tarifs" Type="Self.tarif" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cinema">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tarifs">
+              <PropertyRef Name="id_cinema" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="idCinemaSalle">
+          <End Role="cinema" Type="Self.cinema" Multiplicity="1" />
+          <End Role="salle" Type="Self.salle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cinema">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="salle">
+              <PropertyRef Name="id_cinema" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="idResponsable">
+          <End Role="responsable" Type="Self.responsable" Multiplicity="1" />
+          <End Role="cinema" Type="Self.cinema" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="responsable">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="cinema">
+              <PropertyRef Name="id_responsable" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="idDirecteurDirection">
+          <End Role="directeur" Type="Self.directeur" Multiplicity="1" />
+          <End Role="direction" Type="Self.direction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="directeur">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="direction">
+              <PropertyRef Name="id_directeur" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="idFilmDirection">
+          <End Role="film" Type="Self.film" Multiplicity="1" />
+          <End Role="direction" Type="Self.direction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="film">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="direction">
+              <PropertyRef Name="id_film" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="idDSeanceEstPresente">
+          <End Role="seance" Type="Self.seance" Multiplicity="1" />
+          <End Role="estpresente" Type="Self.estpresente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="seance">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="estpresente">
+              <PropertyRef Name="id_seance" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="idFilmEstPresente">
+          <End Role="film" Type="Self.film" Multiplicity="1" />
+          <End Role="estpresente" Type="Self.estpresente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="film">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="estpresente">
+              <PropertyRef Name="id_film" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="idFilmRole">
+          <End Role="film" Type="Self.film" Multiplicity="1" />
+          <End Role="role" Type="Self.role" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="film">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="role">
+              <PropertyRef Name="id_film" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="idGenreFilm">
+          <End Role="genre" Type="Self.genre" Multiplicity="0..1" />
+          <End Role="film" Type="Self.film" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="genre">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="film">
+              <PropertyRef Name="id_genre" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="idSalleSeance">
+          <End Role="salle" Type="Self.salle" Multiplicity="1" />
+          <End Role="seance" Type="Self.seance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="salle">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="seance">
+              <PropertyRef Name="id_salle" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="idSalleSupplements">
+          <End Role="salle" Type="Self.salle" Multiplicity="1" />
+          <End Role="supplements" Type="Self.supplement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="salle">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="supplements">
+              <PropertyRef Name="id_salle" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="cinemadbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="acteurs" EntityType="Self.acteur" />
+          <EntitySet Name="cinemas" EntityType="Self.cinema" />
+          <EntitySet Name="directeurs" EntityType="Self.directeur" />
+          <EntitySet Name="directions" EntityType="Self.direction" />
+          <EntitySet Name="estpresentes" EntityType="Self.estpresente" />
+          <EntitySet Name="films" EntityType="Self.film" />
+          <EntitySet Name="genres" EntityType="Self.genre" />
+          <EntitySet Name="profils" EntityType="Self.profil" />
+          <EntitySet Name="responsables" EntityType="Self.responsable" />
+          <EntitySet Name="roles" EntityType="Self.role" />
+          <EntitySet Name="salles" EntityType="Self.salle" />
+          <EntitySet Name="seances" EntityType="Self.seance" />
+          <EntitySet Name="supplements" EntityType="Self.supplement" />
+          <EntitySet Name="tarifs" EntityType="Self.tarif" />
+          <AssociationSet Name="idActeurRole" Association="Self.idActeurRole">
+            <End Role="acteur" EntitySet="acteurs" />
+            <End Role="role" EntitySet="roles" />
+          </AssociationSet>
+          <AssociationSet Name="idCinema" Association="Self.idCinema">
+            <End Role="cinema" EntitySet="cinemas" />
+            <End Role="tarifs" EntitySet="tarifs" />
+          </AssociationSet>
+          <AssociationSet Name="idCinemaSalle" Association="Self.idCinemaSalle">
+            <End Role="cinema" EntitySet="cinemas" />
+            <End Role="salle" EntitySet="salles" />
+          </AssociationSet>
+          <AssociationSet Name="idResponsable" Association="Self.idResponsable">
+            <End Role="responsable" EntitySet="responsables" />
+            <End Role="cinema" EntitySet="cinemas" />
+          </AssociationSet>
+          <AssociationSet Name="idDirecteurDirection" Association="Self.idDirecteurDirection">
+            <End Role="directeur" EntitySet="directeurs" />
+            <End Role="direction" EntitySet="directions" />
+          </AssociationSet>
+          <AssociationSet Name="idFilmDirection" Association="Self.idFilmDirection">
+            <End Role="film" EntitySet="films" />
+            <End Role="direction" EntitySet="directions" />
+          </AssociationSet>
+          <AssociationSet Name="idDSeanceEstPresente" Association="Self.idDSeanceEstPresente">
+            <End Role="seance" EntitySet="seances" />
+            <End Role="estpresente" EntitySet="estpresentes" />
+          </AssociationSet>
+          <AssociationSet Name="idFilmEstPresente" Association="Self.idFilmEstPresente">
+            <End Role="film" EntitySet="films" />
+            <End Role="estpresente" EntitySet="estpresentes" />
+          </AssociationSet>
+          <AssociationSet Name="idFilmRole" Association="Self.idFilmRole">
+            <End Role="film" EntitySet="films" />
+            <End Role="role" EntitySet="roles" />
+          </AssociationSet>
+          <AssociationSet Name="idGenreFilm" Association="Self.idGenreFilm">
+            <End Role="genre" EntitySet="genres" />
+            <End Role="film" EntitySet="films" />
+          </AssociationSet>
+          <AssociationSet Name="idSalleSeance" Association="Self.idSalleSeance">
+            <End Role="salle" EntitySet="salles" />
+            <End Role="seance" EntitySet="seances" />
+          </AssociationSet>
+          <AssociationSet Name="idSalleSupplements" Association="Self.idSalleSupplements">
+            <End Role="salle" EntitySet="salles" />
+            <End Role="supplements" EntitySet="supplements" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="cinemadbModelStoreContainer" CdmEntityContainer="cinemadbEntities">
+          <EntitySetMapping Name="acteurs">
+            <EntityTypeMapping TypeName="cinemadbModel.acteur">
+              <MappingFragment StoreEntitySet="acteur">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nom" ColumnName="nom" />
+                <ScalarProperty Name="prenom" ColumnName="prenom" />
+                <ScalarProperty Name="langue" ColumnName="langue" />
+                <ScalarProperty Name="date_naissance" ColumnName="date_naissance" />
+                <ScalarProperty Name="lieu_naissance" ColumnName="lieu_naissance" />
+                <ScalarProperty Name="image" ColumnName="image" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="cinemas">
+            <EntityTypeMapping TypeName="cinemadbModel.cinema">
+              <MappingFragment StoreEntitySet="cinema">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nom" ColumnName="nom" />
+                <ScalarProperty Name="adresse" ColumnName="adresse" />
+                <ScalarProperty Name="telephone" ColumnName="telephone" />
+                <ScalarProperty Name="id_responsable" ColumnName="id_responsable" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="directeurs">
+            <EntityTypeMapping TypeName="cinemadbModel.directeur">
+              <MappingFragment StoreEntitySet="directeur">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nom" ColumnName="nom" />
+                <ScalarProperty Name="prenom" ColumnName="prenom" />
+                <ScalarProperty Name="langue" ColumnName="langue" />
+                <ScalarProperty Name="date_naissance" ColumnName="date_naissance" />
+                <ScalarProperty Name="lieu_naissance" ColumnName="lieu_naissance" />
+                <ScalarProperty Name="image" ColumnName="image" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="directions">
+            <EntityTypeMapping TypeName="cinemadbModel.direction">
+              <MappingFragment StoreEntitySet="direction">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="id_directeur" ColumnName="id_directeur" />
+                <ScalarProperty Name="id_film" ColumnName="id_film" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="estpresentes">
+            <EntityTypeMapping TypeName="cinemadbModel.estpresente">
+              <MappingFragment StoreEntitySet="estpresente">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="id_film" ColumnName="id_film" />
+                <ScalarProperty Name="id_seance" ColumnName="id_seance" />
+                <ScalarProperty Name="isprincipal" ColumnName="isprincipal" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="films">
+            <EntityTypeMapping TypeName="cinemadbModel.film">
+              <MappingFragment StoreEntitySet="film">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="titre" ColumnName="titre" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="annee" ColumnName="annee" />
+                <ScalarProperty Name="duree" ColumnName="duree" />
+                <ScalarProperty Name="note" ColumnName="note" />
+                <ScalarProperty Name="nbr_votes" ColumnName="nbr_votes" />
+                <ScalarProperty Name="revenue" ColumnName="revenue" />
+                <ScalarProperty Name="id_genre" ColumnName="id_genre" />
+                <ScalarProperty Name="image" ColumnName="image" />
+                <ScalarProperty Name="type" ColumnName="type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="genres">
+            <EntityTypeMapping TypeName="cinemadbModel.genre">
+              <MappingFragment StoreEntitySet="genre">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nom" ColumnName="nom" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="profils">
+            <EntityTypeMapping TypeName="cinemadbModel.profil">
+              <MappingFragment StoreEntitySet="profil">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="courriel" ColumnName="courriel" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="nom_complet" ColumnName="nom_complet" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="responsables">
+            <EntityTypeMapping TypeName="cinemadbModel.responsable">
+              <MappingFragment StoreEntitySet="responsable">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nom" ColumnName="nom" />
+                <ScalarProperty Name="prenom" ColumnName="prenom" />
+                <ScalarProperty Name="telephone" ColumnName="telephone" />
+                <ScalarProperty Name="courriel" ColumnName="courriel" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="roles">
+            <EntityTypeMapping TypeName="cinemadbModel.role">
+              <MappingFragment StoreEntitySet="role">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="id_film" ColumnName="id_film" />
+                <ScalarProperty Name="id_acteur" ColumnName="id_acteur" />
+                <ScalarProperty Name="nom_personnage" ColumnName="nom_personnage" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="salles">
+            <EntityTypeMapping TypeName="cinemadbModel.salle">
+              <MappingFragment StoreEntitySet="salle">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="numero" ColumnName="numero" />
+                <ScalarProperty Name="nbr_places" ColumnName="nbr_places" />
+                <ScalarProperty Name="taille_ecran" ColumnName="taille_ecran" />
+                <ScalarProperty Name="exploitable" ColumnName="exploitable" />
+                <ScalarProperty Name="id_cinema" ColumnName="id_cinema" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="seances">
+            <EntityTypeMapping TypeName="cinemadbModel.seance">
+              <MappingFragment StoreEntitySet="seance">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="heure_debut" ColumnName="heure_debut" />
+                <ScalarProperty Name="heure_fin" ColumnName="heure_fin" />
+                <ScalarProperty Name="nom_seance" ColumnName="nom_seance" />
+                <ScalarProperty Name="id_salle" ColumnName="id_salle" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="supplements">
+            <EntityTypeMapping TypeName="cinemadbModel.supplement">
+              <MappingFragment StoreEntitySet="supplements">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="C3d" ColumnName="3d" />
+                <ScalarProperty Name="ultra_avx" ColumnName="ultra_avx" />
+                <ScalarProperty Name="dbox" ColumnName="dbox" />
+                <ScalarProperty Name="imax" ColumnName="imax" />
+                <ScalarProperty Name="id_salle" ColumnName="id_salle" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tarifs">
+            <EntityTypeMapping TypeName="cinemadbModel.tarif">
+              <MappingFragment StoreEntitySet="tarifs">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="prix_adulte" ColumnName="prix_adulte" />
+                <ScalarProperty Name="prix_enfant" ColumnName="prix_enfant" />
+                <ScalarProperty Name="prix_aine" ColumnName="prix_aine" />
+                <ScalarProperty Name="prix_3d" ColumnName="prix_3d" />
+                <ScalarProperty Name="prix_ultra_avx" ColumnName="prix_ultra_avx" />
+                <ScalarProperty Name="prix_dbox" ColumnName="prix_dbox" />
+                <ScalarProperty Name="prix_imax" ColumnName="prix_imax" />
+                <ScalarProperty Name="id_cinema" ColumnName="id_cinema" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

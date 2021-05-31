@@ -1,0 +1,11 @@
+﻿@model CinemasFAST.Models.ViewModels.IndexCinema_ViewModel
+
+@{ ViewBag.Title = "Index"; }
+
+<div>
+    @Html.Partial("~/Views/cinemas/_Index.cshtml", Model.Cinemas)
+</div>
+
+<div>
+    @Html.Partial("_Create", new CinemasFAST.Models.cinema())
+</div>

@@ -1,0 +1,119 @@
+﻿@model CinemasFAST.Models.film
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<div class="jumbotron">
+    <h2>Ajouter un film</h2>
+</div>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="d-flex row col-12">
+
+        <div class="form-horizontal col-6">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.titre, htmlAttributes: new { @class = "control-label col-md-12" })
+                <div class="col-md-12">
+                    @Html.EditorFor(model => model.titre, new { htmlAttributes = new { @class = "form-control col-12" } })
+                    @Html.ValidationMessageFor(model => model.titre, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.annee, htmlAttributes: new { @class = "control-label col-md-12" })
+                <div class="col-md-12">
+                    @Html.EditorFor(model => model.annee, new { htmlAttributes = new { @class = "form-control col-12" } })
+                    @Html.ValidationMessageFor(model => model.annee, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.id_genre, "Genre", htmlAttributes: new { @class = "control-label col-md-12" })
+                <div class="col-md-12">
+                    @Html.DropDownList("id_genre", null, htmlAttributes: new { @class = "form-control col-12" })
+                    @Html.ValidationMessageFor(model => model.id_genre, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.duree, htmlAttributes: new { @class = "control-label col-md-12" })
+                <div class="col-md-12">
+                    @Html.EditorFor(model => model.duree, new { htmlAttributes = new { @class = "form-control col-12" } })
+                    @Html.ValidationMessageFor(model => model.duree, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.note, htmlAttributes: new { @class = "control-label col-md-12" })
+                <div class="col-md-12">
+                    @Html.EditorFor(model => model.note, new { htmlAttributes = new { @class = "form-control col-12" } })
+                    @Html.ValidationMessageFor(model => model.note, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.nbr_votes, htmlAttributes: new { @class = "control-label col-md-12" })
+                <div class="col-md-12">
+                    @Html.EditorFor(model => model.nbr_votes, new { htmlAttributes = new { @class = "form-control col-12" } })
+                    @Html.ValidationMessageFor(model => model.nbr_votes, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.revenue, htmlAttributes: new { @class = "control-label col-md-12" })
+                <div class="col-md-12">
+                    @Html.EditorFor(model => model.revenue, new { htmlAttributes = new { @class = "form-control col-12" } })
+                    @Html.ValidationMessageFor(model => model.revenue, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+        </div>
+
+        <div class="form-horizontal col-6">
+            <div class="form-group">
+                @Html.LabelFor(model => model.image, htmlAttributes: new { @class = "control-label col-md-12" })
+                <div class="col-md-12">
+                    @Html.EditorFor(model => model.image, new { htmlAttributes = new { @class = "form-control col-12" } })
+                    @Html.ValidationMessageFor(model => model.image, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.description, htmlAttributes: new { @class = "control-label col-md-12" })
+                <div class="col-md-12">
+                    @Html.EditorFor(model => model.description, new { htmlAttributes = new { @class = "form-control col-12", @rows = 19 } })
+                    @Html.ValidationMessageFor(model => model.description, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <button type="button" class="btn btn-dark">@Html.ActionLink("Retour", "Index")</button>
+            <input type="submit" value="Ajouter" class="btn btn-success" />
+        </div>
+    </div>
+}
+
+<hr />
+
+<div class="jumbotron">
+    <h4>Importer une liste de films</h4>
+</div>
+
+@using (Html.BeginForm("ImportFile", "films", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+<div class="d-flex-row">
+    <input type="file" name="postedFile" class="form-control m-5 pe-5 pb-5 pt-3" style='width: 50%;'/>
+    <input type="submit" value="Importer" class="btn btn-success mx-5"/>
+</div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

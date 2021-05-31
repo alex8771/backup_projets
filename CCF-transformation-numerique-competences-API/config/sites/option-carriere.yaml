@@ -1,0 +1,15 @@
+api:
+  keywords:
+    - "assistant"
+    - "assurance"
+  location:
+    - "Québec"
+    - "Montréal"
+  "affid": "77e7b3bdafe9a368b0fe5a9f1024d466"
+  "user_agent": "Mozilla/5.0 (X11; Linux x86_64; rv:31.0) Gecko/20100101 Firefox/31.0"
+  "url": "https://iid.ulaval.ca/"
+  "locale_code": "en_CA"
+  "nom_api": "Option-Carriere"
+  "database": "API"
+
+   

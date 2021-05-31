@@ -1,0 +1,44 @@
+html,body, #myGlobalContainer {
+    height:100%;
+    overflow: hidden;
+}
+
+.h1,.h3{
+    color: black;
+}
+
+#Index{
+    background-image: url("../images/Accueil/league-of-legends.jpg"); 
+    background-size: cover;
+    height:100%;
+    width: 100%
+}
+
+#Navbar{
+    background-color: black;
+}
+
+#Lol{
+    color: white;
+    font-style: italic;
+}
+
+#Mode{
+    width: 100%;
+    background-color: black;
+    height: 100%
+}
+
+#ModeJeu{
+    width: 33%;
+    height: 100%
+}
+
+img{
+    width: 100%;
+    height: 100%;
+}
+
+#Persos{
+    background-color: black;
+}

@@ -1,0 +1,71 @@
+﻿@model CinemasFAST.Models.seance
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Êtes-vous sur de vouloir supprimer cette séance?</h3>
+<div>
+    <h4>seance</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.heure_debut)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.heure_debut)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.heure_fin)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.heure_fin)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.nom_seance)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nom_seance)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.film.titre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.film.titre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.salle.taille_ecran)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.salle.taille_ecran)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.salle.id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.salle.id)
+        </dd>
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

@@ -1,0 +1,73 @@
+﻿@model CinemasFAST.Models.salle
+
+@using (Html.BeginForm("Edit", "salles"))
+{
+    @Html.AntiForgeryToken()
+
+    if (ViewBag.erreur == "Existe")
+    {
+        <h4 class="text-danger">Une salle avec ce numéro existe déja!</h4>
+    }
+    else if (ViewBag.erreur == "Succes")
+    {
+        <h4 class="text-success">Salle modifiée avec succès</h4>
+    }
+
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.id)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.numero, htmlAttributes: new { @class = "control-label col-md-12" })
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.numero, new { htmlAttributes = new { @class = "form-control col-12" } })
+                @Html.ValidationMessageFor(model => model.numero, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.nbr_places, htmlAttributes: new { @class = "control-label col-md-12" })
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.nbr_places, new { htmlAttributes = new { @class = "form-control col-12" } })
+                @Html.ValidationMessageFor(model => model.nbr_places, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.taille_ecran, htmlAttributes: new { @class = "control-label col-md-12" })
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.taille_ecran, new { htmlAttributes = new { @class = "form-control col-12" } })
+                @Html.ValidationMessageFor(model => model.taille_ecran, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group d-flex ml-n2 my-4 col-3">
+            @Html.LabelFor(model => model.exploitable, htmlAttributes: new { @class = "control-label col-md-12" })
+            <div class="col-12">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.exploitable)
+                    @Html.ValidationMessageFor(model => model.exploitable, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+
+        <div class="form-group d-none">
+            @Html.LabelFor(model => model.id_cinema, "id_cinema", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-12">
+                @Html.DropDownList("id_cinema", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.id_cinema, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group mb-5">
+            <div class="col-md-offset-2 col-md-10">
+                @Html.ActionLink("Retour", "Edit", "cinemas", new { id = Model.id_cinema }, new { @class = "btn btn-dark" })
+                <input type="submit" value="Enregistrer" class="btn btn-success" />
+            </div>
+        </div>
+    </div>
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
