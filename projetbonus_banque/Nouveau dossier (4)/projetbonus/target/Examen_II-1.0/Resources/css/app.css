@@ -1,0 +1,7 @@
+html,body, #myGlobalContainer{
+    height: 100%;
+}
+
+.card{
+    width: 500px
+}

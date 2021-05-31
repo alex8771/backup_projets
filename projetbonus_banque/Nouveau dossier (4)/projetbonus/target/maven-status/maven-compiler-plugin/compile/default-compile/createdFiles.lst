@@ -1,0 +1,17 @@
+com\mycompany\examen_ii\dao\UserDAO.class
+com\mycompany\examen_ii\servlets\UpdateInfo.class
+com\mycompany\examen_ii\servlets\AddVendeur.class
+com\mycompany\examen_ii\servlets\AddClient.class
+com\mycompany\examen_ii\servlets\UpdateEmail.class
+com\mycompany\examen_ii\resources\JavaEE8Resource.class
+com\mycompany\examen_ii\servlets\RemoveVendeur.class
+com\mycompany\examen_ii\servlets\RemoveUser.class
+com\mycompany\examen_ii\servlets\diviserListe.class
+com\mycompany\examen_ii\servlets\listeTotal.class
+com\mycompany\examen_ii\utils\Utils.class
+com\mycompany\examen_ii\servlets\UpdateAdresse.class
+com\mycompany\examen_ii\servlets\Login.class
+com\mycompany\examen_ii\servlets\Logout.class
+com\mycompany\examen_ii\dto\UserDTO.class
+com\mycompany\examen_ii\JAXRSConfiguration.class
+com\mycompany\examen_ii\servlets\UpdateInteret.class

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="4.0" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd">
+    <welcome-file-list>
+        <welcome-file>/Views/login.jsp</welcome-file>
+    </welcome-file-list>
+    <servlet>
+        <servlet-name>Login</servlet-name>
+        <servlet-class>com.mycompany.examen_ii.servlets.Login</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateInfo</servlet-name>
+        <servlet-class>com.mycompany.examen_ii.servlets.UpdateInfo</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Logout</servlet-name>
+        <servlet-class>com.mycompany.examen_ii.servlets.Logout</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RemoveProduct</servlet-name>
+        <servlet-class>com.mycompany.examen_ii.servlets.RemoveProduct</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Login</servlet-name>
+        <url-pattern>/Connecter</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateInfo</servlet-name>
+        <url-pattern>/UpdateInfo</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Logout</servlet-name>
+        <url-pattern>/Deconnecter</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RemoveProduct</servlet-name>
+        <url-pattern>/RemoveProduct</url-pattern>
+    </servlet-mapping>
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
+</web-app>
